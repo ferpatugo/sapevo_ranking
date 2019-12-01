@@ -1,0 +1,164 @@
+#tutorial
+install.packages("devtools") #Instala o pacote devtools que habilitará a função intall_github() , a qual é resposável por efetuar o dowload dos pacotes alocados no Github;
+library(devtools) #Carrega o pacote devtools que habilitará a função intall_github() , a qual é resposável por efetuar o dowload dos pacotes alocados no Github;
+install_github("ferpatugo/sapevo_pesos") #Instala a função que calculará os pesos dos critérios do método Sapevo-M, os mesmos são fundamentais para que a função sapevo_ranking() consiga efetuar o cálculo da matriz avaliação e as respectivas ordenações das alternativas;
+library(sapevopesos) #Carrega o pacote sapevo_pesos que foi instalado;
+install_github("ferpatugo/sapevo_ranking") #Instala a função que calculará tanto a matriz avaliação do projeto, o peso das alternativas e a ordenação das alternativas inseridas;
+library(sapevoranking) #Carrega o pacote sapevo_pesos que foi instalado;
+
+
+sapevo_pesos("Panificadora",
+             c("Renato","Branca"),
+             c("Gelopar","Metalfrio","Frilux"),
+             c("Capacidade","Custo Aquisição","Custo Manutenção"),
+             #vetor_notas_decisores(critérios)
+             c(0,1,2, -1,0,3, -2,-3,0),
+             c(0,2,1, -2,0,1,  -1,-1,0)
+)
+
+
+sapevo_ranking("Panificadora",
+               c("Renato","Branca"),
+               c("Gelopar","Metalfrio","Frilux"),
+               c("Capacidade","Custo Aquisição","Custo Manutenção"),
+               vetor_peso,
+               #vetor_notas_decisores_criterios(alternativas)
+               #criterio1
+               vetor_notas_decisor1criterio1=c(0,0,-2,  0,0,-1,  2,1,0),
+               vetor_notas_decisor2criterio1=c(0,-1,-2,  1,0,-2,  2,2,0),
+               #criterio2
+               vetor_notas_decisor1criterio2=c(0,-3,-2,  3,0,-1,  2,1,0),
+               vetor_notas_decisor2criterio2=c(0,-3,-3,  3,0,0,  3,0,0),
+               #criterio3
+               vetor_notas_decisor1criterio3=c(0,-2,-1,  2,0,0, 1,0,0),
+               vetor_notas_decisor2criterio3=c(0,-1,-2, 1,0,1,  2,-1,0)
+               
+)
+
+#tutorial 1 decisor adicional 
+#3 decisores, 3 alternativas e 3 critérios
+sapevo_pesos("Projeto",
+             c("Decisor1","Decisor2","Decisor3"),
+             c("Alternativa1","Alternativa2","Alternativa3"),
+             c("Criterio1","Criterio2","Criterio3"),
+             #vetor_notas_decisores(critérios)
+             c(0,1,2, -1,0,3, -2,-3,0),
+             c(0,2,1, -2,0,1,  -1,-1,0),
+             #vetor adicional pela inclusão do Decisor 3
+             c(0,1,1, -1,0,1,  -1,-1,0)
+)
+
+
+sapevo_ranking("Projeto",
+               c("Decisor1","Decisor2","Decisor3"),
+               c("Alternativa1","Alternativa2","Alternativa3"),
+               c("Criterio1","Criterio2","Criterio3"),
+               vetor_peso,
+               #vetor_notas_decisores_criterios(alternativas)
+               #criterio1
+               vetor_notas_decisor1criterio1=c(0,0,-2,  0,0,-1,  2,1,0),
+               vetor_notas_decisor2criterio1=c(0,-1,-2,  1,0,-2,  2,2,0),
+               #vetor adicional pela inclusão do Decisor 3 criterio 1
+               vetor_notas_decisor3criterio1=c(0,1,1, -1,0,1,  -1,-1,0),
+               
+               #criterio2
+               vetor_notas_decisor1criterio2=c(0,-3,-2,  3,0,-1,  2,1,0),
+               vetor_notas_decisor2criterio2=c(0,-3,-3,  3,0,0,  3,0,0),
+               #vetor adicional pela inclusão do Decisor 3 criterio 2
+               vetor_notas_decisor3criterio2=c(0,1,1, -1,0,1,  -1,-1,0),
+               
+               #criterio3
+               vetor_notas_decisor1criterio3=c(0,-2,-1,  2,0,0, 1,0,0),
+               vetor_notas_decisor2criterio3=c(0,-1,-2, 1,0,1,  2,-1,0),
+               #vetor adicional pela inclusão do Decisor 3 criterio3
+               vetor_notas_decisor3criterio3=c(0,1,1, -1,0,1,  -1,-1,0)
+               
+)
+
+
+#------------
+
+
+#tutorial 1 alternativa adicional
+#2 decisores, 4 alternativas e 3 critérios
+sapevo_pesos("Projeto",
+             c("Decisor1","Decisor2"),
+             c("Alternativa1","Alternativa2","Alternativa3","Alternativa4"),
+             c("Criterio1","Criterio2","Criterio3"),
+             #vetor_notas_decisores(critérios)
+             c(0,1,2, -1,0,3, -2,-3,0),
+             c(0,2,1, -2,0,1,  -1,-1,0)
+           
+)
+
+
+#sapevo_ranking("Projeto",
+#               c("Decisor1","Decisor2","Decisor3"),
+#               c("Alternativa1","Alternativa2","Alternativa3","Alternativa4"),
+#               c("Criterio1","Criterio2","Criterio3"),
+#               vetor_peso,
+#               #vetor_notas_decisores_criterios(alternativas)
+#               #criterio1
+#               vetor_notas_decisor1criterio1=c(0,0,-2, Comparaçãonova1 ,  0,0,-1, Comparaçãonova2 ,  2,1,0 , Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0),
+#               
+#               vetor_notas_decisor2criterio1=c(0,-1,-2, Comparaçãonova1 ,  1,0,-2, Comparaçãonova2 , 2,2,0, Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0),
+#               
+#               #criterio2
+#               vetor_notas_decisor1criterio2=c(0,-3,-2, Comparaçãonova1 ,  3,0,-1, Comparaçãonova2 ,  2,1,0 , Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0),
+#               vetor_notas_decisor2criterio2=c(0,-3,-3, Comparaçãonova1 ,  3,0,0, Comparaçãonova2 , 3,0,0 , Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0),
+#               
+#               #criterio3
+#               vetor_notas_decisor1criterio3=c(0,-2,-1, Comparaçãonova1 ,  2,0,0, Comparaçãonova2 , 1,0,0 , Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0),
+#               vetor_notas_decisor2criterio3=c(0,1,1, Comparaçãonova1 , -1,0,1, Comparaçãonova2 , -1,-1,0  , Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0)
+#               
+#               )
+
+
+#tutorial 1 critério adicional
+#2 decisores, 3 alternativas e 4 critérios
+#sapevo_pesos("Projeto",
+#             c("Decisor1","Decisor2"),
+#             c("Alternativa1","Alternativa2","Alternativa3"),
+#             c("Criterio1","Criterio2","Criterio3","Criterio4"),
+#             #vetor_notas_decisores(critérios)
+#             c(0,1,2, Comparaçãonova1 , -1,0,3, Comparaçãonova2 , -2,-3,0 , Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0 ),
+#             c(0,2,1, Comparaçãonova1 , -2,0,1, Comparaçãonova2 , -1,-1,0 , Comparaçãonova3 , Comparaçãonova_-1,Comparaçãonova_-2,Comparaçãonova_-3,0 )
+#             
+#             
+#)
+sapevo_pesos("Projeto",
+             c("Decisor1","Decisor2"),
+             c("Alternativa1","Alternativa2","Alternativa3"),
+             c("Criterio1","Criterio2","Criterio3","Criterio4"),
+             #vetor_notas_decisores(critérios)
+             c(0,1,2, 1 , -1,0,3, 2 , -2,-3,0 , 3 , -1,-2,-3,0 ),
+             c(0,2,1, 1 , -2,0,1, 2 , -1,-1,0 , 3 , -1,-2,-3,0 )
+             
+             
+)
+
+sapevo_ranking("Projeto",
+               c("Decisor1","Decisor2"),
+               c("Alternativa1","Alternativa2","Alternativa3"),
+               c("Criterio1","Criterio2","Criterio3","Criterio4"),
+               vetor_peso,
+               #vetor_notas_decisores_criterios(alternativas)
+               #criterio1
+               vetor_notas_decisor1criterio1=c(0,0,-2,  0,0,-1,  2,1,0),
+               vetor_notas_decisor2criterio1=c(0,-1,-2,  1,0,-2,  2,2,0),
+               
+               #criterio2
+               vetor_notas_decisor1criterio2=c(0,-3,-2,  3,0,-1,  2,1,0),
+               vetor_notas_decisor2criterio2=c(0,-3,-3,  3,0,0,  3,0,0),
+               
+               #criterio3
+               vetor_notas_decisor1criterio3=c(0,-2,-1,  2,0,0, 1,0,0),
+               vetor_notas_decisor2criterio3=c(0,-1,-2, 1,0,1,  2,-1,0),
+               
+               #vetor adicional pela inclusão do Criterio4
+               vetor_notas_decisor1criterio4=c(0,-2,-1,  2,0,0, 1,0,0),
+               vetor_notas_decisor2criterio4=c(0,-1,-2, 1,0,1,  2,-1,0)
+)
+
+
+
